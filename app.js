@@ -12,9 +12,13 @@ var flash = require('connect-flash');
 // routing and controllers
 var routes = require('./routes/index');
 var uploads = require('./routes/upload');
-var projects = require('./routes/projects');
-var login = require('./routes/login');
-var transcriptions = require('./routes/transcription');
+var login = require('./routes/login_controller');
+var projects = require('./routes/project_controller');
+var speakers = require('./routes/speaker_controller');
+var annotations = require('./routes/annotation_controller');
+var transcriptions = require('./routes/transcription_controller');
+var papercuts = require('./routes/papercut_controller');
+var paperedits = require('./routes/paperedit_controller');
 
 // mongoose
 var database = require('./config/database'); // load the database config
@@ -66,6 +70,10 @@ app.use('/', login);
 app.use('/', uploads);
 app.use('/', projects);
 app.use('/', transcriptions);
+app.use('/', speakers);
+app.use('/', annotations);
+app.use('/', papercuts);
+app.use('/', paperedits);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

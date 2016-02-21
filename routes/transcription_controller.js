@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET trasncription page. */
+/* GET transcription page. */
 router.get('/transcribed', isLoggedIn, function(req, res, next) {
   res.render('transcribed', { title: 'Auto Edit Desktop' });
 });
