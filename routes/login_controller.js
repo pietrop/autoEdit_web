@@ -6,6 +6,8 @@ var Account = require('../models/account');
 
 var router = express.Router();
 
+
+// ======================= register =======================
 router.post('/register', function(req, res) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
@@ -17,7 +19,9 @@ router.post('/register', function(req, res) {
         });
     });
 });
+// ======================= end register =======================
 
+// ======================= login =======================
 router.get('/login', function(req, res) {
     res.render('login', {
         title: 'Auto Edit Desktop Edition - Log In',
@@ -29,11 +33,16 @@ router.get('/login', function(req, res) {
 router.post('/login', passport.authenticate('local'), function(req, res) {
     res.redirect('/');
 });
+// ======================= end login =======================
 
+
+// ======================= logout =======================
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
+// ======================= end logout =======================
+
 
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");

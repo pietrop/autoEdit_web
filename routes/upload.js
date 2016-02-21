@@ -127,6 +127,7 @@ console.log("File extension: " + req.file.mimetype);
 });
 //  ================   END POST UPLOADED ==================
 
+
 //  ================   DELETE DIRECTORY ==================
 router.post('/delete', isLoggedIn, function(req, res, next){
 
@@ -140,6 +141,7 @@ router.post('/delete', isLoggedIn, function(req, res, next){
  });
 });
 //  ================   END POST DELETE DIRECTORY ==================
+
 
 // ================   DELETE PROJECT ==================
 router.post('/delete/:id', isLoggedIn, function(req, res, next){
