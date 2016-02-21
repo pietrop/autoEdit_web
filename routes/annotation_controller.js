@@ -8,7 +8,20 @@ Annotation = require('../models/annotation.js');
 
 // ================== get all the annotations =====================
 router.get('/annotations', isLoggedIn, function(req, res, next) {
-  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+
+  Annotation.find(function(err, annotations) {
+
+    // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+    if (err)
+      res.send(err)
+
+    // res.render('list_annotations',{
+    //   title: 'Auto Edit - List Annotations',
+    //   annotation: annotations
+    // });
+
+  });
+
 });
 // ================== end get all the annotations ==================
 
@@ -36,6 +49,16 @@ router.post('/annotations', isLoggedIn, function(req, res, next) {
 
 // ====================== get a single annotation =======================
 router.get('/annotations/:id', isLoggedIn, function(req, res, next) {
+
+  _id = req.params.id;
+
+	Annotation.findById(_id, function(err, annotation){
+
+    // CODE
+
+  });
+
+
   // res.render('list_projects', { title: 'Auto Edit Desktop' });
 });
 // ====================== end get a single annotation ===================
