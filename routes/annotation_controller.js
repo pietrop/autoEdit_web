@@ -4,8 +4,6 @@ var router = express.Router();
 Annotation = require('../models/annotation.js');
 
 
-
-
 // ================== get all the annotations =====================
 router.get('/annotations', isLoggedIn, function(req, res, next) {
 
@@ -15,6 +13,7 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
     if (err) res.send(err)
 
       res.format({
+
 				html: function(){
           res.render('list_annotations',{
             title: 'Auto Edit - List Annotations',
@@ -22,10 +21,12 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
           });
 				},
 				json: function(){
-					res.json({message : 'deleted',
+					res.json({
+            message : 'deleted',
 						item : annotations
 					});
 				}
+
 			});
 
   });
@@ -44,9 +45,11 @@ router.post('/annotations', isLoggedIn, function(req, res, next) {
   });
 
   annotation.save(function(err){
+
     if(err) return next(err);
 
     res.format({
+
       html: function(){
         res.render('add_annotations',{
           title: 'Auto Edit - Add Annotations',
@@ -59,10 +62,10 @@ router.post('/annotations', isLoggedIn, function(req, res, next) {
           item : req.body.comment
         });
       }
+
     });
+
   });
-
-
 
 });
 // ================== end create an annotation ==========================
@@ -119,13 +122,16 @@ router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
 		if(err) return next(err);
 
 		annotation.remove(function(err, annot){
+
 			if(err) return next(err);
 
 			res.format({
+
 				html: function(){
 					res.render('deleted_annotation', {
 
 					});
+
 				},
 				json: function(){
 					res.json({
@@ -133,6 +139,7 @@ router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
 						item : annot
 					});
 				}
+
 			});
 
 		});
