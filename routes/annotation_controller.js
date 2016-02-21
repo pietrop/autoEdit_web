@@ -1,10 +1,33 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET projects page. */
-// router.get('/list_projects', function(req, res, next) {
-//   res.render('list_projects', { title: 'Auto Edit Desktop' });
-// });
+Annotation = require('../models/annotation.js');
+
+
+// get all the annotations
+router.get('/annotations', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// create an annotation
+router.post('/annotations', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// get a single annotation
+router.get('/annotations/:id', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// update a single annotation
+router.put('/annotations/:id', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// delete a single annotation
+router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
 
 // *************  TODO: share the middleware in the app! ****************
 

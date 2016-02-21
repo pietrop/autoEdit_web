@@ -1,11 +1,33 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET projects page. */
-// router.get('/list_projects', function(req, res, next) {
-//   res.render('list_projects', { title: 'Auto Edit Desktop' });
-// });
+Papercut = require('../models/papercut.js');
 
+
+// get all the papercuts
+router.get('/papercuts', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// create an papercut
+router.post('/papercuts', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// get a single papercut
+router.get('/papercuts/:id', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// update a single papercut
+router.put('/papercuts/:id', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
+
+// delete a single papercut
+router.delete('/papercuts/:id', isLoggedIn, function(req, res, next) {
+  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+});
 // *************  TODO: share the middleware in the app! ****************
 
 // route middleware to make sure a user is logged in
