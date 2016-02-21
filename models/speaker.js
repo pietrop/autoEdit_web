@@ -1,4 +1,4 @@
-//transcript model
+//speaker model
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var Schema = mongoose.Schema;

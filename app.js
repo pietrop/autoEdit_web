@@ -25,6 +25,8 @@ var Account = require('./models/account.js');
 var Project = require('./models/project.js');
 var Transcript = require('./models/transcript.js');
 var Speaker = require('./models/speaker.js');
+var Papercut = require('./models/papercut.js');
+var Paperedit = require('./models/paperedit.js');
 
 
 // passport config

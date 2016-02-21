@@ -1,25 +1,24 @@
-//transcript model
+//paperedit model
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var Schema = mongoose.Schema;
   // passportLocalMongoose = require('passport-local-mongoose');
 
 
-var Transcript = new Schema({
+var Paperedit = new Schema({
   name: String,
   description: String,
-  paragraph: [{
+  sections: [{
     id: Schema.ObjectId,
-    words: [{
-      id: Schema.ObjectId,
-      start: Number,
-      end: Number,
-      text: String
-    }],
-    speakers: [{ type : Schema.ObjectId, ref: 'Speaker' }]
+    title: String,
+    description: String,
+    duration: Number,
+    order: Number,
+    papercuts: [{ type : Schema.ObjectId, ref: 'Papercut' }]
   }]
+
 });
 
 // Project.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('transcripts', Transcript);
+module.exports = mongoose.model('paperedits', Paperedit);
