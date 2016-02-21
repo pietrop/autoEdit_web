@@ -12,22 +12,22 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
     // if there is an error retrieving, send the error. nothing after res.send(err) will execute
     if (err) res.send(err)
 
-      res.format({
+    res.format({
 
-				html: function(){
-          res.render('list_annotations',{
-            title: 'Auto Edit - List Annotations',
-            annotation: annotations
-          });
-				},
-				json: function(){
-					res.json({
-            message : 'deleted',
-						item : annotations
-					});
-				}
+      html: function() {
+        res.render('list_annotations', {
+          title: 'Auto Edit - List Annotations',
+          annotation: annotations
+        });
+      },
+      json: function() {
+        res.json({
+          message: 'deleted',
+          item: annotations
+        });
+      }
 
-			});
+    });
 
   });
 
@@ -44,22 +44,22 @@ router.post('/annotations', isLoggedIn, function(req, res, next) {
     name: req.body.comment
   });
 
-  annotation.save(function(err){
+  annotation.save(function(err) {
 
-    if(err) return next(err);
+    if (err) return next(err);
 
     res.format({
 
-      html: function(){
-        res.render('add_annotations',{
+      html: function() {
+        res.render('add_annotations', {
           title: 'Auto Edit - Add Annotations',
           annotation: req.body.comment
         });
       },
-      json: function(){
+      json: function() {
         res.json({
-          message : 'saved',
-          item : req.body.comment
+          message: 'saved',
+          item: req.body.comment
         });
       }
 
@@ -78,18 +78,18 @@ router.get('/annotations/:id', isLoggedIn, function(req, res, next) {
 
   _id = req.params.id;
 
-	Annotation.findById(_id, function(err, annotation){
+  Annotation.findById(_id, function(err, annotation) {
 
     res.format({
-      html: function(){
+      html: function() {
         res.render('list_single_annotation', {
 
         });
       },
-      json: function(){
+      json: function() {
         res.json({
-          message : 'list',
-          item : annotation
+          message: 'list',
+          item: annotation
         });
       }
     });
@@ -117,34 +117,34 @@ router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
 
   _id = req.params.id;
 
-	Annotation.findById(_id, function(err, annotation){
+  Annotation.findById(_id, function(err, annotation) {
 
-		if(err) return next(err);
+    if (err) return next(err);
 
-		annotation.remove(function(err, annot){
+    annotation.remove(function(err, annot) {
 
-			if(err) return next(err);
+      if (err) return next(err);
 
-			res.format({
+      res.format({
 
-				html: function(){
-					res.render('deleted_annotation', {
+        html: function() {
+          res.render('deleted_annotation', {
 
-					});
+          });
 
-				},
-				json: function(){
-					res.json({
-            message : 'deleted',
-						item : annot
-					});
-				}
+        },
+        json: function() {
+          res.json({
+            message: 'deleted',
+            item: annot
+          });
+        }
 
-			});
+      });
 
-		});
+    });
 
-	});
+  });
 
 });
 // ====================== end delete a single annotation =================
@@ -158,7 +158,7 @@ function isLoggedIn(req, res, next) {
 
   // if user is authenticated in the session, carry on
   if (req.isAuthenticated())
-  return next();
+    return next();
 
   // if they aren't redirect them to the home page
   res.redirect('/login');

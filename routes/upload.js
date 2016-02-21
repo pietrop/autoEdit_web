@@ -26,11 +26,15 @@ dirPath = null;
 
 /* GET upload page. */
 router.get('/upload_video', isLoggedIn, function(req, res, next) {
-  res.render('upload_video', { title: 'Auto Edit Desktop' });
+  res.render('upload_video', {
+    title: 'Auto Edit Desktop'
+  });
 });
 
 router.get('/upload_video_srt', isLoggedIn, function(req, res, next) {
-  res.render('upload_video_srt', { title: 'Auto Edit Desktop' });
+  res.render('upload_video_srt', {
+    title: 'Auto Edit Desktop'
+  });
 });
 
 
@@ -43,34 +47,34 @@ router.post('/uploaded', isLoggedIn, uploading.single('videoFile'), function(req
   console.log('File temporary name: ' + req.file.filename);
   console.log('Project name: ' + req.body.projectTitle);
 
-// TODO:
-//      - get video file path
-//      - split audio (pass it to to_audio)
-//      - move audio file into ./projects/...
-//      - if mimetype video make mp4, ogv (NO mp4 on NWJS)
-//      - if mimetype audio  make ogg, mp3
+  // TODO:
+  //      - get video file path
+  //      - split audio (pass it to to_audio)
+  //      - move audio file into ./projects/...
+  //      - if mimetype video make mp4, ogv (NO mp4 on NWJS)
+  //      - if mimetype audio  make ogg, mp3
 
 
 
   async.series([
 
-    function first(callback){
+    function first(callback) {
       createFolder('./projects/' + req.body.projectTitle);
       callback(null, 'one');
     },
 
-    function second(callback){
+    function second(callback) {
       renameUploaded('./uploads/' + req.file.filename, './uploads/' + req.file.originalname);
       callback(null, 'two');
     },
 
-    function third(callback){
+    function third(callback) {
       // TO DO: add to_audio function
       moveFile('./uploads/' + req.file.originalname, './projects/' + req.body.projectTitle + '/' + req.file.originalname);
       callback(null, 'three');
     },
 
-    function fourth(callback){
+    function fourth(callback) {
       filePath = getFiles('./projects/' + req.body.projectTitle);
       dirPath = './projects/' + req.body.projectTitle; //needed for delete and db insert
 
@@ -91,18 +95,18 @@ router.post('/uploaded', isLoggedIn, uploading.single('videoFile'), function(req
       } else {
 
         res.render('uploaded_project', {
-         title: 'Auto Edit - File Uploaded',
-         fileUploaded: filePath,
-         project:req.body.projectTitle,
-         size: convertInKB(req.file.size),
-         mimetype: detectMimetype(req.file.mimetype)
-       });
+          title: 'Auto Edit - File Uploaded',
+          fileUploaded: filePath,
+          project: req.body.projectTitle,
+          size: convertInKB(req.file.size),
+          mimetype: detectMimetype(req.file.mimetype)
+        });
 
       }
       callback(null, 'four');
     },
 
-    function fifth(callback){
+    function fifth(callback) {
 
       var project = new Project({
         name: req.body.projectTitle,
@@ -110,73 +114,71 @@ router.post('/uploaded', isLoggedIn, uploading.single('videoFile'), function(req
       });
 
 
-      project.save(function(err, project){
-        if(err){
+      project.save(function(err, project) {
+        if (err) {
           return next(err);
         }
-        });
+      });
 
       callback(null, 'five');
     }
 
-    ]);
+  ]);
 
-console.log("File path: " + filePath);
-console.log("File extension: " + req.file.mimetype);
+  console.log("File path: " + filePath);
+  console.log("File extension: " + req.file.mimetype);
 
 });
 //  ================   END POST UPLOADED ==================
 
 
 //  ================   DELETE DIRECTORY ==================
-router.post('/delete', isLoggedIn, function(req, res, next){
+router.post('/delete', isLoggedIn, function(req, res, next) {
 
-  console.log("Directory path: " +  dirPath);
+  console.log("Directory path: " + dirPath);
 
   deleteDirectory(dirPath);
 
   res.render('deleted_msg', {
-   title: 'Auto Edit - Project Deleted',
-   fileUploaded: filePath
- });
+    title: 'Auto Edit - Project Deleted',
+    fileUploaded: filePath
+  });
 });
 //  ================   END POST DELETE DIRECTORY ==================
 
 
 // ================   DELETE PROJECT ==================
-router.post('/delete/:id', isLoggedIn, function(req, res, next){
+router.post('/delete/:id', isLoggedIn, function(req, res, next) {
 
   console.log(req.params.id);
 
-  _id =  req.params.id;
+  _id = req.params.id;
 
-  Project.findById(_id, function(err, project){
-    if(err)
-    {
+  Project.findById(_id, function(err, project) {
+    if (err) {
       next(err);
-    }
-
-    else{
+    } else {
       deleteDirectory(project.folder_path);
 
       filePath = project.name;
 
-      project.remove(function(err, proj){
-        if(err) console.log(err);
+      project.remove(function(err, proj) {
+        if (err) console.log(err);
 
         res.format({
-          html: function(){
-           res.render('deleted_unit', {
-             title: 'Auto Edit - Project Deleted',
-             fileUploaded: filePath
-           });
-         },
-         json: function(){
-           res.json({message : 'deleted',
-            item : proj
-          });
-         }
-       });
+          html: function() {
+            res.render('deleted_unit', {
+              title: 'Auto Edit - Project Deleted',
+              fileUploaded: filePath
+            });
+          },
+          json: function() {
+            res.json({
+              message: 'deleted',
+              item: proj
+            });
+          }
+        });
       });
     }
   });
@@ -184,14 +186,14 @@ router.post('/delete/:id', isLoggedIn, function(req, res, next){
 //  ================   END POST DELETE PROJECT ==================
 
 //  ================   UTILITY ==================
-function createFolder(dir){
-  if(fs.existsSync(dir)){
+function createFolder(dir) {
+  if (fs.existsSync(dir)) {
     console.log("Directory already there");
-  }else{
-    fs.mkdir(dir, function(err){
-      if(err){
+  } else {
+    fs.mkdir(dir, function(err) {
+      if (err) {
         console.log(err);
-      }else{
+      } else {
         console.log("Directory created");
       }
     });
@@ -199,28 +201,28 @@ function createFolder(dir){
 }
 
 // MOVE FILES
-function moveFile(origin, dest){
-  fs.rename(origin, dest, function(err){
-    if(err){
+function moveFile(origin, dest) {
+  fs.rename(origin, dest, function(err) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log("File moved");
     }
   });
 }
 
 // DELETE DIRECTORY
-function deleteDirectory(dir){
+function deleteDirectory(dir) {
   fsExtra.removeSync(dir);
 }
 
 // GET FILES
-function getFiles (dir, files_){
+function getFiles(dir, files_) {
   files_ = files_ || [];
   var files = fs.readdirSync(dir);
-  for (var i in files){
+  for (var i in files) {
     var name = dir + '/' + files[i];
-    if (fs.statSync(name).isDirectory()){
+    if (fs.statSync(name).isDirectory()) {
       getFiles(name, files_);
     } else {
       files_.push(name);
@@ -231,10 +233,10 @@ function getFiles (dir, files_){
 
 // RENAME FILE
 function renameUploaded(origin, dest) {
-  fs.rename(origin, dest, function(err){
-    if(err){
+  fs.rename(origin, dest, function(err) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log("File renamed");
     }
   });
@@ -272,23 +274,23 @@ function decomp(unzip, videoName) {
 function detectMimetype(file) {
   switch (file) {
     case 'text/html':
-    return 'html';
+      return 'html';
     case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-    return 'docx';
+      return 'docx';
     case 'text/javascript':
-    return 'js';
+      return 'js';
     case 'text/css':
-    return 'css';
+      return 'css';
     case 'image/png':
-    return 'png';
+      return 'png';
     case 'image/jpeg':
-    return 'jpeg';
+      return 'jpeg';
     case 'application/pdf':
-    return 'pdf';
+      return 'pdf';
     case 'application/zip':
-    return 'zip';
+      return 'zip';
     case 'text/markdown':
-    return 'md';
+      return 'md';
   }
 }
 //  ================   END UTILITY ==================
@@ -298,12 +300,12 @@ function detectMimetype(file) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('/login');
+  // if they aren't redirect them to the home page
+  res.redirect('/login');
 }
 
 module.exports = router;
