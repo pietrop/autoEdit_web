@@ -43,6 +43,15 @@ router.post('/uploaded', isLoggedIn, uploading.single('videoFile'), function(req
   console.log('File temporary name: ' + req.file.filename);
   console.log('Project name: ' + req.body.projectTitle);
 
+// TODO:
+//      - get video file path
+//      - split audio (pass it to to_audio)
+//      - move audio file into ./projects/...
+//      - if mimetype video make mp4, ogv (NO mp4 on NWJS)
+//      - if mimetype audio  make ogg, mp3
+
+
+
   async.series([
 
     function first(callback){
@@ -56,6 +65,7 @@ router.post('/uploaded', isLoggedIn, uploading.single('videoFile'), function(req
     },
 
     function third(callback){
+      // TO DO: add to_audio function
       moveFile('./uploads/' + req.file.originalname, './projects/' + req.body.projectTitle + '/' + req.file.originalname);
       callback(null, 'three');
     },
