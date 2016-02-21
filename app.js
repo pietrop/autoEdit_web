@@ -23,6 +23,8 @@ mongoose.connect(database.url); // connect to mongoDB database on modulus.io
 // schema/model
 var Account = require('./models/account.js');
 var Project = require('./models/project.js');
+var Transcript = require('./models/transcript.js');
+var Speaker = require('./models/speaker.js');
 
 
 // passport config
