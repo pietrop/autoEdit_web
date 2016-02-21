@@ -12,13 +12,21 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
   Annotation.find(function(err, annotations) {
 
     // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-    if (err)
-      res.send(err)
+    if (err) res.send(err)
 
-    res.render('list_annotations',{
-      title: 'Auto Edit - List Annotations',
-      annotation: annotations
-    });
+      res.format({
+				html: function(){
+          res.render('list_annotations',{
+            title: 'Auto Edit - List Annotations',
+            annotation: annotations
+          });
+				},
+				json: function(){
+					res.json({message : 'deleted',
+						item : annotations
+					});
+				}
+			});
 
   });
 
@@ -36,11 +44,26 @@ router.post('/annotations', isLoggedIn, function(req, res, next) {
   });
 
   annotation.save(function(err){
-    if(err)
-    return next(err);
+    if(err) return next(err);
+
+    res.format({
+      html: function(){
+        res.render('add_annotations',{
+          title: 'Auto Edit - Add Annotations',
+          annotation: req.body.comment
+        });
+      },
+      json: function(){
+        res.json({
+          message : 'saved',
+          item : req.body.comment
+        });
+      }
+    });
   });
 
-  // res.render('list_projects', { title: 'Auto Edit Desktop' });
+
+
 });
 // ================== end create an annotation ==========================
 
@@ -54,12 +77,23 @@ router.get('/annotations/:id', isLoggedIn, function(req, res, next) {
 
 	Annotation.findById(_id, function(err, annotation){
 
-    // CODE
+    res.format({
+      html: function(){
+        res.render('list_single_annotation', {
+
+        });
+      },
+      json: function(){
+        res.json({
+          message : 'list',
+          item : annotation
+        });
+      }
+    });
 
   });
 
 
-  // res.render('list_projects', { title: 'Auto Edit Desktop' });
 });
 // ====================== end get a single annotation ===================
 
@@ -89,12 +123,13 @@ router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
 
 			res.format({
 				html: function(){
-					res.render('deleted_client', {
+					res.render('deleted_annotation', {
 
 					});
 				},
 				json: function(){
-					res.json({message : 'deleted',
+					res.json({
+            message : 'deleted',
 						item : annot
 					});
 				}
@@ -104,8 +139,6 @@ router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
 
 	});
 
-
-  // res.render('list_projects', { title: 'Auto Edit Desktop' });
 });
 // ====================== end delete a single annotation =================
 
