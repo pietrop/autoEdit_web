@@ -4,6 +4,7 @@ config.json
 .env
 #ignore markdown,so can make notes
 *.markdown
+
 #ignore all video files
 *.wmv
 *.mpg
@@ -15,6 +16,8 @@ config.json
 *.ogv
 *.ogg
 *.webm
+*.wav
+
 #ingore subtitles files
 *.srt
 *.sbv
