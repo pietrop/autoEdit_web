@@ -1,0 +1,20 @@
+<form id="uploadForm" enctype="multipart/form-data" action="uploaded" method="post">
+
+			<div class="form-group">
+				<label for="projectTitle">Project title</label>
+				<input type="text" class="form-control" name="projectTitle" placeholder="Title">
+			</div><!-- form-group -->
+			<br>
+
+
+			<div class="form-group">
+				<label for="videoFile">Video</label>
+				  <input class="btn btn-default" type="file" name="videoFile" />
+          <br>
+        <label for="srtFile">*.srt</label>
+          <input class="btn btn-default" type="file" name="srtFile" />
+          <br>
+				<input class="btn btn-primary" type="submit" value="Upload" name="submit">
+			</div><!-- form-group -->
+
+</form>

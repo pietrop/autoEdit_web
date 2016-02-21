@@ -1,0 +1,35 @@
+
+<div class="container">
+  <h1>File uploaded</h1>
+  <h2>The following files have been uploaded: </h2>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead></thead>
+      <%  for (i=0; i<fileUploaded.length; i++){ %>
+      <th></th>
+      <tr>
+
+        <div class="col-md-3"><i class="fa fa-tag"></i>
+          <%= fileUploaded[i] %>
+        </div><!-- col-md-3 -->
+
+        <div class="col-md-3"><i class="fa fa-th"></i>
+          <%= size %>
+        </div><!-- col-md-3 -->
+
+        <div class="col-md-3"><i class="fa fa-file-code-o"></i>
+          <%= mimetype %>
+        </div><!-- col-md-3 -->
+
+        <div class="col-md-3">
+          <form action="delete" method="post">
+            <input type="submit" name="delete" class="btn btn-danger" value="Delete" >
+          </form>
+        </div><!-- col-md-3 -->
+      </tr>
+      <%  } %>
+
+    </table>
+  </div><!-- table-responsive -->
+</div><!-- container -->

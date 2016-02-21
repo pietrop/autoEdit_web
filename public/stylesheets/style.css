@@ -1,0 +1,30 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
+
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+div#sign-out-container {position: absolute; top: 10px; margin: 0; padding: 0;}
+li#logout-button {position: absolute; left: 45%;}
+div#app-header a{ color: #000;}
+div#app-header a:hover{ color: #000;  text-decoration:none; }
+
+div.container { width: 100%; margin: 0 auto;}
+
+div.footer-text-container {position: relative; width: 100%; height: 40px; background-color: #f5f5f5;}
+div.footer-text-container a {position: absolute; left: 45%; bottom: 10px;}
+
+div.editing-view-container {float: left; height: auto;}
+div.transcription-container { position: relative; width: 50%; }
+div.editing-container { position: relative; width: 50%; }
+
+div.video-container div{ position: absolute; height: 250px; left: 102%; top: 164px;}
+div.transcription-container textarea{ position: absolute; height: 250px; left: 102%; top: 164px;}
+div.editing-container textarea{ position: absolute; left: -3%;}

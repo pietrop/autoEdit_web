@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><% include partials/template/head.ejs %></head>
+<body>
+	<br> <br>  <br>  <br>
+	<div class="panel panel-default" style="width: 20em; margin-left: 39%; margin-top: 10%;">
+		<div class="panel-body" style="padding:5px;">
+			<div class="container text-center wrapper">
+				<% if (!user) { %>
+				<a href="/login"> <button class="btn btn-primary">Login</button></a>
+				<br><br>
+				<a href="/register"> <button class="btn btn-success">Register</button></a>
+				<% }%>
+				<% if (user) { %>
+				<h2>Signed in</h2>
+				<p> You are currently logged in as <b><%= user.username %></b> </p>
+				<a href="/home" ><button class="btn btn-primary"> Go to Home page </button></a>
+				<a href="/logout"><button class="btn btn-danger"> Logout </button></a>
+				<% } %>
+			</div>
+		</div>
+	</div>
+
+	<% include partials/template/jsdefaults.ejs %>
+</body>
+</html>
