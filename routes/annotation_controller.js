@@ -15,10 +15,10 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
     if (err)
       res.send(err)
 
-    // res.render('list_annotations',{
-    //   title: 'Auto Edit - List Annotations',
-    //   annotation: annotations
-    // });
+    res.render('list_annotations',{
+      title: 'Auto Edit - List Annotations',
+      annotation: annotations
+    });
 
   });
 
