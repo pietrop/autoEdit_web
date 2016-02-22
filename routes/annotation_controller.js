@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+// use multer for multiform type data possibily
+
 Annotation = require('../models/annotation.js');
 
 
@@ -22,7 +24,7 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
       },
       json: function() {
         res.json({
-          message: 'deleted',
+          message: 'annotation',
           item: annotations
         });
       }
@@ -33,8 +35,6 @@ router.get('/annotations', isLoggedIn, function(req, res, next) {
 
 });
 // ================== end get all the annotations ==================
-
-
 
 
 // ================== create an annotation ==========================
@@ -71,8 +71,6 @@ router.post('/annotations', isLoggedIn, function(req, res, next) {
 // ================== end create an annotation ==========================
 
 
-
-
 // ====================== get a single annotation =======================
 router.get('/annotations/:id', isLoggedIn, function(req, res, next) {
 
@@ -101,15 +99,11 @@ router.get('/annotations/:id', isLoggedIn, function(req, res, next) {
 // ====================== end get a single annotation ===================
 
 
-
-
 // ====================== update a single annotation =====================
 router.put('/annotations/:id', isLoggedIn, function(req, res, next) {
   // res.render('list_projects', { title: 'Auto Edit Desktop' });
 });
 // ====================== end update a single annotation ==================
-
-
 
 
 // ====================== delete a single annotation ======================
@@ -148,7 +142,6 @@ router.delete('/annotations/:id', isLoggedIn, function(req, res, next) {
 
 });
 // ====================== end delete a single annotation =================
-
 
 
 // *************  TODO: share the middleware in the app! ****************

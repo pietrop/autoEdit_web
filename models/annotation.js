@@ -12,7 +12,7 @@ var Annotation = new Schema({
     name: String,
     description: String
   }],
-  wordsSelectionIds: [Number],
+  wordsSelectionIds: [Number],  // wouldn't be correct [] ?
   transcriptions: { type : Schema.ObjectId, ref: 'transcripts' }
 });
 
