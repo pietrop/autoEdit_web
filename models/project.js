@@ -26,7 +26,7 @@ var Project = new Schema({
             mimeType: String,
             path: String
           }],
-          transcript: { type : Schema.ObjectId, ref: 'Transcript' }
+          transcript: { type : Schema.ObjectId, ref: 'transcripts' }
         }]
 });
 

@@ -14,7 +14,7 @@ var Paperedit = new Schema({
     description: String,
     duration: Number,
     order: Number,
-    papercuts: [{ type : Schema.ObjectId, ref: 'Papercut' }]
+    papercuts: [{ type : Schema.ObjectId, ref: 'papercuts' }]
   }]
 
 });

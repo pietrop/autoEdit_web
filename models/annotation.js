@@ -13,7 +13,7 @@ var Annotation = new Schema({
     description: String
   }],
   wordsSelectionIds: [Number],
-  transcriptions: { type : Schema.ObjectId, ref: 'Transcript' }
+  transcriptions: { type : Schema.ObjectId, ref: 'transcripts' }
 });
 
 // Project.plugin(passportLocalMongoose);

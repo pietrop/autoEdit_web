@@ -9,7 +9,7 @@ var Papercut = new Schema({
   label: String,
   order: Number,
   wordsSelectionIds: [Number],
-  transcriptions: { type : Schema.ObjectId, ref: 'Transcript' }
+  transcriptions: { type : Schema.ObjectId, ref: 'transcripts' }
 });
 
 // Project.plugin(passportLocalMongoose);

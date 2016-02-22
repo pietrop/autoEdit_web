@@ -16,7 +16,7 @@ var Transcript = new Schema({
       end: Number,
       text: String
     }],
-    speakers: [{ type : Schema.ObjectId, ref: 'Speaker' }]
+    speakers: [{ type : Schema.ObjectId, ref: 'speakers' }]
   }]
 });
 
